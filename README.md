@@ -22,7 +22,7 @@ tw5-json-markdown takes this JSON file and generates a folder of Markdown-format
 
 The executable takes two parameters: `tw5-json-markdown -in <jsonFile> -out <markdownFolder>`
 
-A level one header containing the tiddler title is added to the top as the tiddler title is rendered in TiddlyWiki from metadata.
+A level one header containing the tiddler title is added to the top of each Markdown file as the tiddler title is rendered in TiddlyWiki from metadata.
 
 ## Supported formatting
 
