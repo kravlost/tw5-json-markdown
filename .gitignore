@@ -22,5 +22,4 @@ go.work
 
 # project-specific
 markdown/
-tiddlers.json
 .vscode/

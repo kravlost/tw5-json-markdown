@@ -1,0 +1,30 @@
+[
+    {
+        "title": "Exporting to Markdown",
+        "created": "20220706195408687",
+        "modified": "20220706213411785",
+        "type": "text/vnd.tiddlywiki",
+        "text": "# Open the [[Advanced Search|$:/AdvancedSearch]] tiddler\n# Click on the `Filters` tab\n# Enter `[!is[system]]` to list all of the non-system tiddlers\n# Click on the `Export` button to export every tiddler to a single static file\n\n* HTML format produces a single hyperlinked file. \n* JSON format contains the tags and WikiText-format source text. ",
+        "revision": "0",
+        "bag": "default"
+    },
+    {
+        "title": "TiddlyWiki notes",
+        "created": "20220709095707591",
+        "modified": "20220709095715318",
+        "type": "text/vnd.tiddlywiki",
+        "text": "* [[TW5 Formatting]]\r\n* [[Exporting to Markdown]]\r\n* [[https://tiddlywiki.com/]]",
+        "revision": "0",
+        "bag": "default"
+    },
+   {
+        "created": "20220705141141922",
+        "text": "!! Formatting\n\n* ''Bold'': ` ''bold'' `\n* //Italic//: ` //italic// `\n* `raw`: `` `raw` ``\n* ~~strikethrough~~: ` ~~strikethrough~~ `\n* __underline__: `__underline__`\n* 2^^8^^: `2^^8^^`\n* x,,2,,: `x,,2,,`\n\n!!Headings\n\n!Level 1 `! Level 1`\n!!!Level 3 `!!! Level 3`\n!!!!!! Level 6 `!!!!!! Level 6`\n\n!! Dashes\n\n* hyphen - hyphen: `-`\n* en--dash: `--`\n* em---dash: `---`\n\n!! Blockquotes\n\n```\n>Level 1\n>>Level 2\n>>>Level 3\n```\n\nproduces:\n\n>Level 1\n>>Level 2\n>>>Level 3\n\n!! Bulleted lists\n\n```\n* Level 1\n** Level 2\n*** Level 3\n```\n\nproduces\n\n* Level 1\n** Level 2\n*** Level 3\n\n!! Numbered lists\n\n```\n# Level 1\n## Level 2\n### Level 3\n```\n\nproduces:\n\n# Level 1\n## Level 2\n### Level 3\n\n\n!! Tables\n\n```\n|!Cell1==== | !Cell2==== | !Cell3====|\n|Cell4 | Cell5 | Cell6|\n| Cell7| Cell8 |Cell9 |\n```\n\nproduces:\n\n|!Cell1==== | !Cell2==== | !Cell3====|\n|Cell4 | Cell5 | Cell6|\n| Cell7| Cell8 |Cell9 |\n\nNote that the spacing around the cell contents determines the justification.\n\n!! Transclusion\n\nEmbed the contents of another tiddler with `{{TiddlyWiki notes}}`:\n\n{{TiddlyWiki notes}}\n\nThis requires MultiMarkdown in Markdown format.\n\n!! Links\n\n`[[Link target]]` can target either a tiddler or an external URL.\n\n`[[Displayed text|Link target]]` replaces the displayed link target with the supplied text.",
+        "title": "TW5 Formatting",
+        "modified": "20220709132548635",
+        "tags": "[[spaced tag 1]] [[spaced tag 2]] tag3 tag4",
+        "type": "text/vnd.tiddlywiki",
+        "revision": "0",
+        "bag": "default"
+    }
+]
