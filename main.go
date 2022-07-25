@@ -39,7 +39,7 @@ func main() {
 	if err := os.Mkdir(*flagOut, 0755); os.IsExist(err) {
 		fmt.Println("Output folder exists.")
 	} else if err != nil {
-		fmt.Printf("Error created output folder: %v.\n", err)
+		fmt.Printf("Error creating output folder: %v.\n", err)
 	} else {
 		fmt.Println("Output folder created.")
 	}
