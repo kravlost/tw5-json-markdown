@@ -5,11 +5,14 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"os/exec"
+	"path"
 )
 
 var (
-	flagIn  *string
-	flagOut *string
+	flagWiki   *string
+	flagOut    *string
+	flagFilter *string
 )
 
 func init() {
@@ -18,23 +21,27 @@ func init() {
 
 func main() {
 
-	flagIn = flag.String("in", "", "JSON input file")
+	// tiddlywiki "NodeJS WikiFolder" --output "temp output folder" --render "." "temp file.json" "text/plain" '$:/core/templates/exporters/JsonFile' "exportFilter" "[!is[system]]"
+
+	flagWiki = flag.String("wiki", "", "TiddlyWiki folder")
 	flagOut = flag.String("out", "", "Markdown output file")
+	flagFilter = flag.String("filter", "[!is[system]]", "Selection filter")
 
 	flag.Parse()
 
-	if flagIn == nil || *flagIn == "" {
-		log.Fatalln("No -in flag passed.")
+	if flagWiki == nil || *flagWiki == "" {
+		log.Fatalln("No -wiki flag passed.")
 	}
 
 	if flagOut == nil || *flagOut == "" {
 		log.Fatalln("No -out flag passed.")
 	}
 
-	fmt.Println("TiddlyWiki 5 JSON to Markdown Converter")
-	fmt.Println("---------------------------------------")
-	fmt.Printf("In:  %s\n", *flagIn)
-	fmt.Printf("Out: %s\n", *flagOut)
+	fmt.Println("TiddlyWiki 5 NodeJS to Markdown Converter")
+	fmt.Println("-----------------------------------------")
+	fmt.Printf("Wiki:   %s\n", *flagWiki)
+	fmt.Printf("Out:    %s\n", *flagOut)
+	fmt.Printf("Filter: %s\n", *flagFilter)
 
 	if err := os.Mkdir(*flagOut, 0755); os.IsExist(err) {
 		fmt.Println("Output folder exists.")
@@ -44,7 +51,36 @@ func main() {
 		fmt.Println("Output folder created.")
 	}
 
-	json, err := os.ReadFile(*flagIn)
+	tempDir := os.TempDir()
+	tempFile, err := os.CreateTemp(tempDir, "tw5-json")
+	tempFileBase := path.Base(tempFile.Name())
+
+	if err != nil {
+		log.Fatalf("Error creating temp file: %v\n", tempFile)
+	}
+
+	fmt.Printf("Temp:   %s\n", tempFile.Name())
+
+	tempFile.Close()
+
+	//defer os.Remove(tempFile.Name())
+
+	cmd := exec.Command("tiddlywiki", *flagWiki, "--output", tempDir, "--render", ".", tempFileBase, "text/plain", "$:/core/templates/exporters/JsonFile", "exportFilter", *flagFilter)
+	fmt.Println(cmd.String())
+	_, err = cmd.Output()
+
+	if err != nil {
+		switch e := err.(type) {
+		case *exec.Error:
+			log.Fatalln("failed executing:", err)
+		case *exec.ExitError:
+			log.Fatalln("command exit rc =", e.ExitCode())
+		default:
+			panic(err)
+		}
+	}
+
+	json, err := os.ReadFile(tempFile.Name())
 
 	if err != nil {
 		log.Fatalf("Error reading JSON: %v", err)
